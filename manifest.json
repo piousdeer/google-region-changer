@@ -1,0 +1,17 @@
+{
+  "manifest_version": 2,
+  "name": "Google Region Changer",
+  "description": "Force Google to display search results in a specific language and for a specific region.",
+  "version": "1.0.0",
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.google.com/search/*"
+  ]
+}
