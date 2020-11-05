@@ -2,14 +2,21 @@ const browser = globalThis.browser ?? globalThis.chrome;
 
 browser.webRequest.onBeforeRequest.addListener(
   ({ url }) => {
-    const newUrl = new URLSearchParams(url);
+    const params = new URLSearchParams(url);
 
-    newUrl.set("hl", localStorage.language || "en");
-    newUrl.set("gl", localStorage.country || "us");
+    if (!params.get("hl")) {
+      params.set("hl", localStorage.language || "en");
+    }
 
-    return {
-      redirectUrl: decodeURIComponent(newUrl.toString()),
-    };
+    if (!params.get("gl")) {
+      params.set("gl", localStorage.country || "us");
+    }
+
+    const newUrl = decodeURIComponent(params.toString());
+
+    if (newUrl !== url) {
+      return { redirectUrl: newUrl };
+    }
   },
   {
     urls: ["*://*.google.com/search?*"],
