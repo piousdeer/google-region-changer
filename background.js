@@ -5,11 +5,11 @@ browser.webRequest.onBeforeRequest.addListener(
     const params = new URLSearchParams(url);
 
     if (!params.get("hl")) {
-      params.set("hl", localStorage.language || "en");
+      params.set("hl", localStorage.language ?? "en");
     }
 
     if (!params.get("gl")) {
-      params.set("gl", localStorage.country || "us");
+      params.set("gl", localStorage.country ?? "us");
     }
 
     const newUrl = decodeURIComponent(params.toString());
