@@ -1,4 +1,6 @@
-chrome.webRequest.onBeforeRequest.addListener(
+const browser = globalThis.browser ?? globalThis.chrome;
+
+browser.webRequest.onBeforeRequest.addListener(
   ({ url }) => {
     const newUrl = new URLSearchParams(url);
 
